@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('barang_id')->nullable()->constrained('barangs')->nullOnDelete()->cascadeOnUpdate();
             $table->string('kode_transaksi');
             $table->string('tanggal_transaksi');
+            $table->string('jumlah_barang');
             $table->enum('status', ['dibayar', 'belum_dibayar']);
             $table->timestamps();
         });

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('kode_barang')->unique();
             $table->string('nama_barang');
             $table->double('harga')->nullable();
+            $table->double('stok')->nullable();
             $table->timestamps();
         });
     }

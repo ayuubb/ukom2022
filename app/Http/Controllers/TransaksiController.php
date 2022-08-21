@@ -18,19 +18,20 @@ class TransaksiController extends Controller
             'barang_id' => 'required',
             'tanggal_transaksi' => 'required',
             'pelanggan_id' => 'required',
-
             'status' => 'required',
+            'jumlah_barang' => 'required',
         ]);
-        // $tes = Request()->barang_id;
-        // $harga=
-        // $validateTransaksi['status'] = 'pending';
-        // $jumlah = Request()->jumlah;
+        $barang_id = Request()->barang_id;
+        $barang = Barang::findOrfail($barang_id)->stok;
+
+        $jumlah = $barang - Request()->jumlah_barang;
+
         Transaksi::create($validateTransaksi);
 
-        // $barang = Request()->barang_id;
-        // $stok =  Barang::find($barang)->stok;
-        // $jumlah = $jumlah - $stok;
-        // Barang::find($barang)->update($jumlah);
+        Barang::findOrfail($barang_id)->update([
+            'stok' => $jumlah,
+        ]);
+
         return redirect('/transaksi');
     }
 
